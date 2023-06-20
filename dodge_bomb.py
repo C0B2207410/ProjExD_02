@@ -59,10 +59,12 @@ def main():
         
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  # 合計移動量
+        kk_ang = {}
         for k, mv in delta.items():
             if key_lst[k]: 
                 sum_mv[0] += mv[0]
                 sum_mv[1] += mv[1]
+            kk_ang[k] = pg.transform.rotozoom(kk_img, sum_mv, 1)
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
