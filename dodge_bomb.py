@@ -45,7 +45,18 @@ def main():
     # 爆弾Rectの中心座標を乱数で指定する
     bd_rct.center = x, y 
     vx, vy = +5, +5  # 練習２
-
+    #押下されたキーに対するこうかとんの角度
+    kk_ang = {
+        (0, -5):pg.transform.rotozoom(pg.transform.flip(kk_img), 90.0, 1.0),
+        (+5, -5):pg.transform.rotozoom(pg.transform.flip(kk_img), 45.0, 1.0),
+        (+5, 0):pg.transform.rotozoom(pg.transform.flip(kk_img), 0.0, 1.0),
+        (+5, +5):pg.transform.rotozoom(pg.transform.flip(kk_img), -45.0, 1.0),
+        (0, +5):pg.transform.rotozoom(pg.transform.flip(kk_img), -90.0, 1.0),
+        (-5, +5):pg.transform.rotozoom(kk_img, -135.0, 1.0),
+        (-5, 0):pg.transform.rotozoom(kk_img, 180.0, 1.0),
+        (-5, -5):pg.transform.rotozoom(kk_img, 135.0, 1.0)
+    }
+    
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -64,7 +75,6 @@ def main():
             if key_lst[k]: 
                 sum_mv[0] += mv[0]
                 sum_mv[1] += mv[1]
-            kk_ang[k] = pg.transform.rotozoom(kk_img, sum_mv, 1)
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
